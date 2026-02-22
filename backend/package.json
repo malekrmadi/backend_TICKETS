@@ -1,0 +1,15 @@
+{
+  "name": "tickets-assistant-backend",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dayjs": "^1.11.19",
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "xlsx": "^0.18.5"
+  }
+}

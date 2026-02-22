@@ -1,8 +1,10 @@
 # Dependencies
 node_modules/
+backend/node_modules/
+frontend/node_modules/
 
-# Uploaded files (temporary, should never be committed)
-uploads/
+# Uploaded files (temporary, never commit)
+backend/uploads/
 
 # Environment variables
 .env
@@ -22,6 +24,9 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Excel test files (optional — remove this line if you want to commit sample data)
+# Vite build output
+frontend/dist/
+
+# Excel test files (remove this line if you want to commit sample data)
 *.xlsx
 *.xls
