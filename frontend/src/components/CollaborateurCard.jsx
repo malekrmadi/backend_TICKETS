@@ -74,6 +74,9 @@ export default function CollaborateurCard({ name, data }) {
                 <span className="priority-rank">#{i + 1}</span>
                 <div className="priority-info">
                   <span className="priority-id">Ticket #{ticket.ticket_id}</span>
+                  {ticket.objet && (
+                    <span className="priority-objet">{ticket.objet}</span>
+                  )}
                   <span className="priority-client">{ticket.client}</span>
                 </div>
                 <div className="priority-tags">

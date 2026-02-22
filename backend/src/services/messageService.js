@@ -61,7 +61,9 @@ exports.buildCollaborateurMessage = (name, summary, topPriorities, quickWins) =>
   if (topPriorities.length > 0) {
     msg += `🔥 **Tes priorités du moment :**\n`;
     topPriorities.forEach((t, i) => {
-      msg += `  ${i + 1}. Ticket #${t.ticket_id} (${t.client}) — ${priorityLabel(t.priorite)}, ${statutLabel(t.statut)}`;
+      msg += `  ${i + 1}. Ticket #${t.ticket_id}`;
+      if (t.objet) msg += ` — « ${t.objet} »`;
+      msg += ` (${t.client}) — ${priorityLabel(t.priorite)}, ${statutLabel(t.statut)}`;
       if (t.age_days > 7) msg += `, ouvert depuis **${t.age_days} jours**`;
       msg += "\n";
     });
@@ -72,7 +74,9 @@ exports.buildCollaborateurMessage = (name, summary, topPriorities, quickWins) =>
   if (quickWins.length > 0) {
     msg += `⚡ **Relances rapides à faire (${quickWins.length} ticket(s)) :**\n`;
     quickWins.forEach((t) => {
-      msg += `  • Ticket #${t.ticket_id} (${t.client}) — ouvert depuis **${t.age_days} jours**`;
+      msg += `  • Ticket #${t.ticket_id}`;
+      if (t.objet) msg += ` — « ${t.objet} »`;
+      msg += ` (${t.client}) — ouvert depuis **${t.age_days} jours**`;
       if (t.statut) msg += `, statut : ${statutLabel(t.statut)}`;
       msg += "\n";
     });
@@ -87,10 +91,13 @@ exports.buildCollaborateurMessage = (name, summary, topPriorities, quickWins) =>
 // Short suggested message the collaborateur can send to the client for a quick-win ticket
 exports.buildClientReminderMessage = (ticket) => {
   const firstName = ticket.client ? ticket.client.split(" ")[0] : "cher client";
+  const objetLine = ticket.objet
+    ? `au sujet de votre demande **« ${ticket.objet} »** (réf. #${ticket.ticket_id})`
+    : `au sujet de votre demande (réf. #${ticket.ticket_id})`;
 
   return (
     `Bonjour ${firstName},\n\n` +
-    `Je me permets de vous contacter au sujet de votre demande (réf. #${ticket.ticket_id}).\n` +
+    `Je me permets de vous contacter ${objetLine}.\n` +
     `Sachez qu'elle est bien enregistrée dans notre système et qu'elle est actuellement **${statutLabel(ticket.statut)}**.\n` +
     `Nous faisons notre maximum pour y apporter une réponse dans les meilleurs délais.\n\n` +
     `N'hésitez pas à nous contacter si vous avez des questions.\n\n` +
